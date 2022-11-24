@@ -1,4 +1,4 @@
-package com.example.elobit.models;
+package com.example.elobit.models.entity;
 
 import lombok.*;
 
