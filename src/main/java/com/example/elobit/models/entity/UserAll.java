@@ -4,10 +4,11 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
-public class UserAuthorisation {
+public class UserAll {
     @Id
     private String username;
 
