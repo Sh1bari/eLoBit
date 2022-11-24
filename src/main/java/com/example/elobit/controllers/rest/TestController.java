@@ -48,7 +48,7 @@ public class TestController {
     @PostMapping("/registration")
     private RegistrationAnswer registration(@RequestBody UserAll user){
         RegistrationAnswer registrationAnswer = new RegistrationAnswer();
-        if(!userAllRepo.existsByUsername(user.getUsername())){
+        if(userAllRepo.existsByUsername(user.getUsername())){
             registrationAnswer.setUsernameAnswer("denied");
         }else{
             registrationAnswer.setUsernameAnswer("success");
