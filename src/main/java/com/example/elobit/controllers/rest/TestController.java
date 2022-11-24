@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class TestController {
     @Autowired
     private UserAuthorisationRepo userAuthorisationRepo;
 
-    @CrossOrigin
     @GetMapping("/")
     private List<UserAuthorisation> home(){
         List<UserAuthorisation> user = (List<UserAuthorisation>) userAuthorisationRepo.findAll();
