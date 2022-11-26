@@ -1,19 +1,18 @@
-package com.example.elobit.mail;
+package com.example.elobit.mail.mailService;
 
-import com.example.elobit.mail.mailService.EmailService;
+import com.example.elobit.mail.mailService.EmailServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmailServiceImpl implements EmailService {
+public class EmailServiceImpl implements EmailServiceInterface {
 
     @Autowired
     private JavaMailSender emailSender;
 
-    public void sendSimpleMessage(
-            String to, String subject, String text) {
+    public void sendSimpleMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("bmstuorganaizer@gmail.com");
         message.setTo(to);

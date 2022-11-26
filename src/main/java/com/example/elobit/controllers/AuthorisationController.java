@@ -1,13 +1,9 @@
 package com.example.elobit.controllers;
 
-import com.example.elobit.mail.EmailServiceImpl;
-import com.example.elobit.mail.mailService.EmailService;
 import com.example.elobit.models.entity.Users;
 import com.example.elobit.models.response.AuthorisationAnswer;
-import com.example.elobit.models.response.RegistrationAnswer;
 import com.example.elobit.repo.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -39,36 +35,4 @@ public class AuthorisationController {
         return answer;
     }
 
-    /**
-     * @author Vladimir Krasnov
-     * @param user входные параметры username и password;
-     * @return status: denied/success
-     * success - добавление пользователя в БД
-     */
-    @PostMapping("/registration")
-    private RegistrationAnswer registration(@RequestBody Users user){
-        RegistrationAnswer registrationAnswer = new RegistrationAnswer();
-        if(usersRepo.existsByUsername(user.getUsername())){
-            registrationAnswer.setStatus("denied");
-        }else{
-            registrationAnswer.setStatus("success");
-            usersRepo.save(user);
-        }
-        return registrationAnswer;
-    }
-
-    /**
-     * @author Vladimir Krasnov
-     * ниже тестовый раздел с mail фичей.
-     */
-    @Autowired
-    private EmailService emailService;
-
-    @GetMapping("/test1")
-    private void test(){
-        emailService.sendSimpleMessage(
-                "vova_krasnov_2004@mail.ru",
-                "test",
-                "test");
-    }
 }

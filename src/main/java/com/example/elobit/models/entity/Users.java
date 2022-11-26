@@ -1,5 +1,6 @@
 package com.example.elobit.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -21,12 +22,14 @@ public class Users {
 
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private String mail;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "username")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Notices> notices = new ArrayList<>(); // таблица для заметок
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "username")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Tasks> tasks = new ArrayList<>(); //таблица для задач
