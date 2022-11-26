@@ -1,4 +1,4 @@
-package com.example.elobit.mail.controllers;
+package com.example.elobit.controllers;
 
 /**
  * @author Vladimir Krasnov

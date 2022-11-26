@@ -1,9 +1,9 @@
-package com.example.elobit.mail.controllers;
+package com.example.elobit.controllers;
 
-import com.example.elobit.models.entity.Notices;
+import com.example.elobit.models.entity.Tasks;
 import com.example.elobit.models.entity.Users;
 import com.example.elobit.models.response.Status;
-import com.example.elobit.repo.NoticesRepo;
+import com.example.elobit.repo.TasksRepo;
 import com.example.elobit.repo.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,27 +13,26 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/notices")
-public class NoticesController {
-
+@RequestMapping("/tasks")
+public class TasksController {
     @Autowired
     private UsersRepo usersRepo;
 
     @Autowired
-    private NoticesRepo noticesRepo;
+    private TasksRepo tasksRepo;
 
     /**
      * @author Vladimir Krasnov
      * @param username имя пользователя из cookie
-     * @param notices поиск по полям year и month
-     * @return List<Notices> из всех заметок пользователя по году и месяцу
+     * @param tasks поиск по полям year и month
+     * @return List<Tasks> из всех задач пользователя по году и месяцу
      */
     @PostMapping("/show/{username}")
-    private List<Notices> showNotices(@PathVariable String username, @RequestBody Notices notices){
+    private List<Tasks> showTasks(@PathVariable String username, @RequestBody Tasks tasks){
         Users user = usersRepo.findByUsername(username);
-        String year = notices.getYear();
-        String month = notices.getMonth();
-        return user.getNotices().stream()
+        String year = tasks.getYear();
+        String month = tasks.getMonth();
+        return user.getTasks().stream()
                 .filter(o -> o.getYear().equals(year))
                 .filter(o -> o.getMonth().equals(month))
                 .collect(Collectors.toList());
@@ -42,17 +41,17 @@ public class NoticesController {
     /**
      * @author Vladimir Krasnov
      * @param username cookie username
-     * @param notice входные данные модели Notices
+     * @param task входные данные модели Tasks
      * @return status = success/denied
-     * success - заметка добавлена
+     * success - задача добавлена
      */
     @PostMapping("/add/{username}")
-    private Status addNotice(@PathVariable String username, @RequestBody Notices notice){
+    private Status addTask(@PathVariable String username, @RequestBody Tasks task){
         Status status = new Status("success");
         try {
-            notice.setId(0);
+            task.setId(0);
             Users user = usersRepo.findByUsername(username);
-            user.getNotices().add(notice);
+            user.getTasks().add(task);
             usersRepo.save(user);
         }catch (Exception exception){
             status.setStatus("denied");
@@ -64,13 +63,13 @@ public class NoticesController {
      * @author Vladimir Krasnov
      * @param id id заметки для удаления из БД
      * @return status = success/denied
-     * success - заметка удалена
+     * success - задача удалена
      */
     @PostMapping("/delete/{id}")
-    private Status deleteNotice(@PathVariable Integer id){
+    private Status deleteTask(@PathVariable Integer id){
         Status status = new Status("success");
         try{
-            noticesRepo.deleteById(id);
+            tasksRepo.deleteById(id);
         }catch (Exception exception){
             status.setStatus("denied");
         }
@@ -79,19 +78,20 @@ public class NoticesController {
 
     /**
      * @author Vladimir Krasnov
-     * @param notice все поля модели Notices
+     * @param task все поля модели Tasks
      * @return status = success/denied
      * success - изменена
      * заметка изменяется по id на новую (рекоммендуемые изменяемые поля text и title)
      */
     @PostMapping("/change")
-    private Status changeNotice(@RequestBody Notices notice){
+    private Status changeTask(@RequestBody Tasks task){
         Status status = new Status("success");
         try{
-            noticesRepo.save(notice);
+            tasksRepo.save(task);
         }catch (Exception exception){
             status.setStatus("denied");
         }
         return status;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.example.elobit.mail.controllers;
+package com.example.elobit.controllers;
 
 import com.example.elobit.mail.EmailServiceImpl;
 import com.example.elobit.mail.mailService.EmailService;
