@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @CrossOrigin
-@RestController("/notices")
+@RestController
+@RequestMapping("/notices")
 public class NoticesController {
 
     @Autowired

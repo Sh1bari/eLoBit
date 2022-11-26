@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @CrossOrigin
-@RestController("/tasks")
+@RestController
+@RequestMapping("/tasks")
 public class TasksController {
     @Autowired
     private UsersRepo usersRepo;
