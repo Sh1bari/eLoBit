@@ -7,5 +7,5 @@ import lombok.Setter;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 public class RegistrationAnswer {
-    private String usernameAnswer;
+    private String status;
 }
