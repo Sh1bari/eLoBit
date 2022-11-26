@@ -50,7 +50,7 @@ public class NoticesController {
     private Status addNotice(@PathVariable String username, @RequestBody Notices notice){
         Status status = new Status("success");
         try {
-            notice.setId(0);
+            notice.setId(1);
             Users user = usersRepo.findByUsername(username);
             user.getNotices().add(notice);
             usersRepo.save(user);

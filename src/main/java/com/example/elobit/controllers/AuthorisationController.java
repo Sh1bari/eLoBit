@@ -56,10 +56,15 @@ public class AuthorisationController {
         }
         return registrationAnswer;
     }
+
+    /**
+     * @author Vladimir Krasnov
+     * ниже тестовый раздел с mail фичей.
+     */
     @Autowired
     private EmailService emailService;
 
-    @GetMapping("/")
+    @GetMapping("/test")
     private void test(){
         emailService.sendSimpleMessage(
                 "vova_krasnov_2004@mail.ru",
