@@ -63,7 +63,7 @@ public class AuthorisationController {
     private void test(){
         emailService.sendSimpleMessage(
                 "vova_krasnov_2004@mail.ru",
-                "АЗАТ Я В АХУЕ",
-                "АЗАТ Я В АХУЕ");
+                "Я делал это 40 минут",
+                "И не могу продолжать, тк распирает от того, что всё получилось");
     }
 }
