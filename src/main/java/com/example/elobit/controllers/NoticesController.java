@@ -32,11 +32,10 @@ public class NoticesController {
         Users user = usersRepo.findByUsername(username);
         String year = notices.getYear();
         String month = notices.getMonth();
-        List<Notices> userNotices = user.getNotices().stream()
+        return user.getNotices().stream()
                 .filter(o -> o.getYear().equals(year))
                 .filter(o -> o.getMonth().equals(month))
                 .collect(Collectors.toList());
-        return userNotices;
     }
 
     /**
@@ -44,7 +43,7 @@ public class NoticesController {
      * @param username cookie username
      * @param notice входные данные модели Notices
      * @return status = success/denied
-     * success - запись добавлена
+     * success - заметка добавлена
      */
     @PostMapping("/add/{username}")
     private Status addNotice(@PathVariable String username, @RequestBody Notices notice){
@@ -59,11 +58,36 @@ public class NoticesController {
         }
         return status;
     }
+
+    /**
+     * @author Vladimir Krasnov
+     * @param id id заметки для удаления из БД
+     * @return status = success/denied
+     * success - заметка удалена
+     */
     @PostMapping("/delete/{id}")
     private Status deleteNotice(@PathVariable Integer id){
         Status status = new Status("success");
         try{
             noticesRepo.deleteById(id);
+        }catch (Exception exception){
+            status.setStatus("denied");
+        }
+        return status;
+    }
+
+    /**
+     * @author Vladimir Krasnov
+     * @param notice все поля модели Notices
+     * @return status = success/denied
+     * success - изменена
+     * заметка изменяется по id на новую (рекоммендуемые изменяемые поля text и title)
+     */
+    @PostMapping("/change")
+    private Status changeNotice(@RequestBody Notices notice){
+        Status status = new Status("success");
+        try{
+            noticesRepo.save(notice);
         }catch (Exception exception){
             status.setStatus("denied");
         }
