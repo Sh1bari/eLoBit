@@ -64,7 +64,7 @@ public class AuthorisationController {
     @Autowired
     private EmailService emailService;
 
-    @GetMapping("/test")
+    @GetMapping("/test1")
     private void test(){
         emailService.sendSimpleMessage(
                 "vova_krasnov_2004@mail.ru",
