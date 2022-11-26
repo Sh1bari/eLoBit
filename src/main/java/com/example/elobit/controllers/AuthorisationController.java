@@ -1,10 +1,13 @@
 package com.example.elobit.controllers;
 
+import com.example.elobit.mail.EmailServiceImpl;
+import com.example.elobit.mail.mailService.EmailService;
 import com.example.elobit.models.entity.Users;
 import com.example.elobit.models.response.AuthorisationAnswer;
 import com.example.elobit.models.response.RegistrationAnswer;
 import com.example.elobit.repo.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -52,5 +55,15 @@ public class AuthorisationController {
             usersRepo.save(user);
         }
         return registrationAnswer;
+    }
+    @Autowired
+    private EmailService emailService;
+
+    @GetMapping("/")
+    private void test(){
+        emailService.sendSimpleMessage(
+                "vova_krasnov_2004@mail.ru",
+                "АЗАТ Я В АХУЕ",
+                "АЗАТ Я В АХУЕ");
     }
 }
