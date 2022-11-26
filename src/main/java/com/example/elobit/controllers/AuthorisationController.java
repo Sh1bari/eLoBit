@@ -17,8 +17,8 @@ public class AuthorisationController {
 
     /**
      * @author Vladimir Krasnov
-     * @param user получает логин и пароль
-     * @return answer модели AuthorisationAnswer с ответами correct/incorrect
+     * @param user входные параметры username и password
+     * @return модель AuthorisationAnswer с ответами correct/incorrect
      *
      * проверка на существование пользователя и сопоставление с паролем
      */
@@ -38,11 +38,11 @@ public class AuthorisationController {
         return answer;
     }
 
-    /*
-    * запрос регистарации пользователя
-    * проверка на уже существующего пользователя в БД
-    * сохранение пользователя в БД
-    */
+    /**
+     * @param user входные параметры username и password;
+     * @return status: denied/success
+     * success - добавление пользователя в БД
+     */
     @PostMapping("/registration")
     private RegistrationAnswer registration(@RequestBody Users user){
         RegistrationAnswer registrationAnswer = new RegistrationAnswer();
