@@ -1,0 +1,14 @@
+### Send POST request with json body
+POST http://localhost:8082/registration
+Content-Type: application/json
+
+{
+  "username": "test",
+  "password": "test"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+client.assert(response.status === 200, "Response status is not 200");
+});
+%}
