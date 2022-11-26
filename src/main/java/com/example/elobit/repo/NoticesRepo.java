@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface NoticesRepo extends CrudRepository<Notices, Integer> {
-    List<Notices> findByMonthAndYear(String month, String year);
+    void deleteById(Integer id);
 }

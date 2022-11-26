@@ -8,6 +8,11 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Vladimir Krasnov
+ * БД пользователей
+ */
+
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class Users {
@@ -19,10 +24,10 @@ public class Users {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "username")
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Notices> notices = new ArrayList<>();
+    private List<Notices> notices = new ArrayList<>(); // таблица для заметок
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "username")
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Tasks> tasks = new ArrayList<>();
+    private List<Tasks> tasks = new ArrayList<>(); //таблица для задач
 }

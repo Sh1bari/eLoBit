@@ -7,8 +7,6 @@ import com.example.elobit.repo.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
-
 @CrossOrigin
 @RestController
 public class AuthorisationController {
@@ -39,6 +37,7 @@ public class AuthorisationController {
     }
 
     /**
+     * @author Vladimir Krasnov
      * @param user входные параметры username и password;
      * @return status: denied/success
      * success - добавление пользователя в БД
