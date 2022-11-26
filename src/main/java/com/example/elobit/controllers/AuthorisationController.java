@@ -15,6 +15,13 @@ public class AuthorisationController {
     @Autowired
     private UsersRepo usersRepo;
 
+    /**
+     * @author Vladimir Krasnov
+     * @param user получает логин и пароль
+     * @return answer модели AuthorisationAnswer с ответами correct/incorrect
+     *
+     * проверка на существование пользователя и сопоставление с паролем
+     */
     @PostMapping("/authorisation/login")
     private AuthorisationAnswer authorisationLogin(@RequestBody Users user){
         AuthorisationAnswer answer = new AuthorisationAnswer();
@@ -31,6 +38,11 @@ public class AuthorisationController {
         return answer;
     }
 
+    /*
+    * запрос регистарации пользователя
+    * проверка на уже существующего пользователя в БД
+    * сохранение пользователя в БД
+    */
     @PostMapping("/registration")
     private RegistrationAnswer registration(@RequestBody Users user){
         RegistrationAnswer registrationAnswer = new RegistrationAnswer();
