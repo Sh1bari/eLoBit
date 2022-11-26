@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class Notices {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String day; //формат: (0 <= число <= 31)
