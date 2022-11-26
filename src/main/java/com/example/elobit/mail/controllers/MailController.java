@@ -1,8 +1,8 @@
-package com.example.elobit.controllers;
+package com.example.elobit.mail.controllers;
 
 /**
  * @author Vladimir Krasnov
  * в процессе разработки
  */
-public class MainController {
+public class MailController {
 }
