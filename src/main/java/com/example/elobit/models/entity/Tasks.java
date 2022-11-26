@@ -15,7 +15,7 @@ import javax.persistence.Id;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class Tasks {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String day; //формат: (0 <= число <= 31)
@@ -34,5 +34,5 @@ public class Tasks {
 
     private String importance; //формат: (true/false)
 
-    private String alert; //формат: кол-во часов(1, 2...)
+    private String alert; //формат: кол-во минут(15, 20...)
 }
