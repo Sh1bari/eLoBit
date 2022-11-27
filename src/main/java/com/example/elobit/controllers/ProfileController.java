@@ -1,12 +1,15 @@
 package com.example.elobit.controllers;
 
 import com.example.elobit.models.entity.Users;
+import com.example.elobit.models.response.Statistic;
 import com.example.elobit.models.response.Status;
 import com.example.elobit.models.samples.SampleUser;
 import com.example.elobit.passwordEncoder.PasswordEncoder;
 import com.example.elobit.repo.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -46,6 +49,23 @@ public class ProfileController {
         users.setPassword(passwordEncoder.encode(sampleUser.getNewPassword()));
         usersRepo.save(users);
         return new Status("success");
+    }
+
+    @PostMapping("/findAll")
+    private Statistic stats(@RequestBody SampleUser sampleUser){
+        Users user = usersRepo.findByMail(sampleUser.getUsername());
+        Statistic stats = new Statistic();
+        int notices;
+        int tasks;
+
+        notices = user.getNotices().size();
+        stats.setNotices(Integer.toString(notices));
+
+        tasks = user.getTasks().size();
+        stats.setTasks(Integer.toString(tasks));
+
+
+        return stats;
     }
 
 }
