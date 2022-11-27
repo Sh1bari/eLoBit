@@ -32,7 +32,9 @@ public class MailTasksSender {
     @ConditionalOnProperty(name="scheduler.enabled")
     public void scheduleFixedRateTaskAsync() {
         //LocalTime time = LocalTime.now().withSecond(0).withNano(0);
-        String curMil = Long.toString(System.currentTimeMillis());
+        long curMil1 = System.currentTimeMillis()/1000;
+
+        String curMil = Long.toString(curMil1) + "000";
         System.out.println(curMil);
         if(tasksRepo.existsByTimeOfAlert(curMil)){
             List<Tasks> tasks = tasksRepo.findByTimeOfAlert(curMil);
