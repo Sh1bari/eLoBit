@@ -47,7 +47,7 @@ public class MailRegistrationController {
             Mail mail = new Mail();
             mail.setMail(user.getMail());
             mail.setCode(code);
-            LocalTime time = LocalTime.now().plusMinutes(5);
+            LocalTime time = LocalTime.now().plusMinutes(5).withNano(0).withSecond(0);
             mail.setTime(time);
             mailRepo.save(mail);
         }

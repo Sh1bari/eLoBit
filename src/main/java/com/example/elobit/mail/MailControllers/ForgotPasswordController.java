@@ -44,7 +44,7 @@ public class ForgotPasswordController {
             Mail mail = new Mail();
             mail.setMail(sampleUser.getMail());
             mail.setCode(code);
-            LocalTime time = LocalTime.now().plusMinutes(5);
+            LocalTime time = LocalTime.now().plusMinutes(5).withNano(0).withSecond(0);
             mail.setTime(time);
             mailRepo.save(mail);
             status.setStatus("success");

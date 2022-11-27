@@ -55,4 +55,9 @@ public class Tasks {
      * кол-во минут(15, 20...)
      */
     private String alert;
+    /**
+     * время для предупреждения
+     */
+    private String timeOfAlert;
+
 }
