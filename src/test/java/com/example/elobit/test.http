@@ -1,5 +1,5 @@
 ### Send POST request with json body
-POST http://localhost:8082/registration
+POST http://localhost:8082/authorisation/login
 Content-Type: application/json
 
 {

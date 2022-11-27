@@ -50,22 +50,4 @@ public class ProfileController {
         usersRepo.save(users);
         return new Status("success");
     }
-
-    @PostMapping("/findAll")
-    private Statistic stats(@RequestBody SampleUser sampleUser){
-        Users user = usersRepo.findByMail(sampleUser.getUsername());
-        Statistic stats = new Statistic();
-        int notices;
-        int tasks;
-
-        notices = user.getNotices().size();
-        stats.setNotices(Integer.toString(notices));
-
-        tasks = user.getTasks().size();
-        stats.setTasks(Integer.toString(tasks));
-
-
-        return stats;
-    }
-
 }
