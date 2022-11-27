@@ -27,11 +27,14 @@ public class MailTasksSender {
     @Autowired
     private TasksRepo tasksRepo;
 
+    /**
+     * @author Vladimir Krasnov
+     * рассылка сообщений
+     */
     @Async
     @Scheduled(cron = "*/1 * * * * *")
     @ConditionalOnProperty(name="scheduler.enabled")
     public void scheduleFixedRateTaskAsync() {
-        //LocalTime time = LocalTime.now().withSecond(0).withNano(0);
         long curMil1 = System.currentTimeMillis()/1000;
 
         String curMil = Long.toString(curMil1) + "000";

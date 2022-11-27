@@ -37,17 +37,22 @@ public class ProfileController {
         }
         return status;
     }
-
     /**
      * @author Vladimir Krasnov
      * @param sampleUser входные данные username, newPassword
      * @return status = success
      */
     @PostMapping("/changePassword")
-    private Status changePassword(@RequestBody SampleUser sampleUser){
+    private Status changePassword(@RequestBody SampleUser sampleUser) {
         Users users = usersRepo.findByUsername(sampleUser.getUsername());
         users.setPassword(passwordEncoder.encode(sampleUser.getNewPassword()));
         usersRepo.save(users);
         return new Status("success");
+    }
+    @GetMapping("/show/{username}")
+    private Users show(@PathVariable String username){
+
+        Users user = usersRepo.findByUsername(username);
+        return user;
     }
 }

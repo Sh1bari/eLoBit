@@ -19,6 +19,10 @@ public class MailCodeDeleter {
     @Autowired
     private MailRepo mailRepo;
 
+    /**
+     * @author Vladimir Krasnov
+     * очистка ненужных ключей
+     */
     @Async
     @Scheduled(cron = "0 */1 * ? * *")
     @ConditionalOnProperty(name="scheduler.enabled")
