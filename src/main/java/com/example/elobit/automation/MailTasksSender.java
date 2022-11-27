@@ -31,6 +31,7 @@ public class MailTasksSender {
         Date date = new Date();
         String convertedDate = date.toString();
         if(tasksRepo.existsByTimeOfAlert(convertedDate)){
+
         }
 
 

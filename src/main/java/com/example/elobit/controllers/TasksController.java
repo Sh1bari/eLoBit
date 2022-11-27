@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @CrossOrigin
@@ -90,6 +91,25 @@ public class TasksController {
             tasksRepo.save(task);
         }catch (Exception exception){
             status.setStatus("denied");
+        }
+        return status;
+    }
+
+    /**
+     * @author Vladimir Krasnov
+     * @param tasks входные данные id, status
+     * @return status = denied/success
+     * denied - ошибка выполнения
+     */
+    @PostMapping("/setStatus")
+    private Status setStatus(@RequestBody Tasks tasks){
+        Status status = new Status("denied");
+        try {
+            Tasks task = tasksRepo.findTasksById(tasks.getId());
+            task.setStatus(tasks.getStatus());
+            tasksRepo.save(task);
+        } catch (Exception e){
+            status.setStatus("success");
         }
         return status;
     }
