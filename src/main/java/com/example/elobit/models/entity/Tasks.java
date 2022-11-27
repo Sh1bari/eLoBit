@@ -60,4 +60,6 @@ public class Tasks {
      */
     private String timeOfAlert;
 
+    private String mail;
+
 }
