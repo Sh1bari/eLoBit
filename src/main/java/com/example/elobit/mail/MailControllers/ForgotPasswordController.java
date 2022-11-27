@@ -11,6 +11,9 @@ import com.example.elobit.repo.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.time.LocalTime;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/mail/forgotPassword")
@@ -35,10 +38,14 @@ public class ForgotPasswordController {
     private Status forgotPasswordForm(@RequestBody SampleUser sampleUser){
         Status status = new Status();
         if(!usersRepo.existsByMail(sampleUser.getMail())){
-            status.setStatus("mail exists");
+            status.setStatus("mail not exists");
         }else {
             String code = Integer.toString(100000 + (int) (Math.random() * 899999));
-            Mail mail = new Mail(sampleUser.getMail(), code);
+            Mail mail = new Mail();
+            mail.setMail(sampleUser.getMail());
+            mail.setCode(code);
+            LocalTime time = LocalTime.now().plusMinutes(5);
+            mail.setTime(time);
             mailRepo.save(mail);
             status.setStatus("success");
         }
@@ -51,8 +58,12 @@ public class ForgotPasswordController {
      */
     @PostMapping("/sendCode")
     private void forgotPasswordSendCode(@RequestBody SampleUser sampleUser){
-        String code = mailRepo.findByMail(sampleUser.getMail()).getCode();
-        emailService.sendSimpleMessage(sampleUser.getMail(),"Восстановление пароля на сайте Bauman Organaizer", "Ваш код для сброса пароля: " + code);
+        try {
+            String code = mailRepo.findByMail(sampleUser.getMail()).getCode();
+            emailService.sendSimpleMessage(sampleUser.getMail(), "Восстановление пароля на сайте Bauman Organaizer", "Ваш код для сброса пароля: " + code);
+        }catch (Exception exception){
+            System.out.println("Ошибка в почтовом адрессе" + sampleUser.getMail());
+        }
     }
 
     /**

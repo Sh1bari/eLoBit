@@ -12,6 +12,8 @@ import com.example.elobit.repo.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/mail/registration")
@@ -42,7 +44,11 @@ public class MailRegistrationController {
         }else{
             registrationAnswer.setStatus("success");
             String code = Integer.toString(100000 + (int) (Math.random() * 899999));
-            Mail mail = new Mail(user.getMail(), code);
+            Mail mail = new Mail();
+            mail.setMail(user.getMail());
+            mail.setCode(code);
+            LocalTime time = LocalTime.now().plusMinutes(5);
+            mail.setTime(time);
             mailRepo.save(mail);
         }
         return registrationAnswer;

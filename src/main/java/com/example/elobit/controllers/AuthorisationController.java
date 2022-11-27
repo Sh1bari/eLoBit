@@ -2,6 +2,7 @@ package com.example.elobit.controllers;
 
 import com.example.elobit.models.entity.Users;
 import com.example.elobit.models.response.AuthorisationAnswer;
+import com.example.elobit.models.samples.SampleUser;
 import com.example.elobit.passwordEncoder.PasswordEncoder;
 import com.example.elobit.repo.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,16 @@ public class AuthorisationController {
             }
         }
         return answer;
+    }
+
+    /**
+     * @author Vladimir Krasnov
+     * @param sampleUser входные данные username
+     * @return mail пользователя
+     */
+    @PostMapping("/getMail")
+    private String getMail(@RequestBody SampleUser sampleUser){
+        return usersRepo.findByUsername(sampleUser.getUsername()).getMail();
     }
 
 }

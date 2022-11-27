@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.LocalTime;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
@@ -12,4 +13,6 @@ public class Mail {
     private String mail;
 
     private String code;
+
+    private LocalTime time;
 }
