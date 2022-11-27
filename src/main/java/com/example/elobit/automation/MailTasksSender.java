@@ -32,10 +32,9 @@ public class MailTasksSender {
     @ConditionalOnProperty(name="scheduler.enabled")
     public void scheduleFixedRateTaskAsync() {
         //LocalTime time = LocalTime.now().withSecond(0).withNano(0);
-        Date date = new Date();
-        String convertedDate = date.toString();
-        if(tasksRepo.existsByTimeOfAlert(convertedDate)){
-            List<Tasks> tasks = tasksRepo.findByTimeOfAlert(convertedDate);
+        System.out.println(System.currentTimeMillis());
+        if(tasksRepo.existsByTimeOfAlert(Long.toString(System.currentTimeMillis()))){
+            List<Tasks> tasks = tasksRepo.findByTimeOfAlert(Long.toString(System.currentTimeMillis()));
             for (Tasks task : tasks) {
                 if(Objects.equals(task.getStatus(), "in progress")) {
                     emailService.sendSimpleMessage(task.getMail(), "Овопещение о задаче",
@@ -43,12 +42,6 @@ public class MailTasksSender {
                 }
             }
         }
-
-
-
-
-
-
 
     }
 }
