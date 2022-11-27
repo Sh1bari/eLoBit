@@ -35,13 +35,10 @@ public class MailTasksSender {
         long curMil1 = System.currentTimeMillis()/1000;
 
         String curMil = Long.toString(curMil1) + "000";
-        System.out.println(curMil);
         if(tasksRepo.existsByTimeOfAlert(curMil)){
             List<Tasks> tasks = tasksRepo.findByTimeOfAlert(curMil);
             for (Tasks task : tasks) {
-                System.out.println(task.getMail());
                 if(task.getStatus().equals("in progress")) {
-                    System.out.println("нашлось");
                     emailService.sendSimpleMessage(task.getMail(), "Овопещение о задаче",
                             "Здравствуйте, у вас есть невыполненное задание: " + task.getTitle() + "\nОписание: " + task.getText() + "\nУспейте к " + task.getTime() + "\n\nУдачного дня!");
                 }
