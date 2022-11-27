@@ -9,7 +9,7 @@ import javax.persistence.Id;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class Mail {
     @Id
-    private String username;
+    private String mail;
 
     private String code;
 }

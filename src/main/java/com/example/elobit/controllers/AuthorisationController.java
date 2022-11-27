@@ -2,6 +2,7 @@ package com.example.elobit.controllers;
 
 import com.example.elobit.models.entity.Users;
 import com.example.elobit.models.response.AuthorisationAnswer;
+import com.example.elobit.passwordEncoder.PasswordEncoder;
 import com.example.elobit.repo.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 public class AuthorisationController {
     @Autowired
     private UsersRepo usersRepo;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     /**
      * @author Vladimir Krasnov
@@ -26,7 +30,7 @@ public class AuthorisationController {
             answer.setUsernameAnswer("incorrect");
         }else{
             answer.setUsernameAnswer("correct");
-            if(!user.getPassword().equals(usersRepo.findByUsername(user.getUsername()).getPassword())){
+            if(!passwordEncoder.matches(user.getPassword(), usersRepo.findByUsername(user.getUsername()).getPassword())){
                 answer.setPasswordAnswer("incorrect");
             } else{
                 answer.setPasswordAnswer("correct");
