@@ -64,9 +64,11 @@ public class ProfileController {
     }
 
     @PostMapping("/showKey")
-    private String showKey(@RequestBody SampleUser sampleUser){
+    private SampleUser showKey(@RequestBody SampleUser sampleUser){
         Users user = usersRepo.findByUsername(sampleUser.getUsername());
-        String key = user.getPassword();
-        return key;
+        SampleUser key1 = new SampleUser();
+        key1.setKey(user.getPassword());
+        return key1;
     }
+
 }

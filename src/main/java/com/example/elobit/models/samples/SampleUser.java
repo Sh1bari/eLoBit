@@ -15,4 +15,6 @@ public class SampleUser {
     private String newPassword;
 
     private String code;
+
+    private String key;
 }
