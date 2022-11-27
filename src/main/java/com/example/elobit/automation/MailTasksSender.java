@@ -43,7 +43,7 @@ public class MailTasksSender {
                 if(task.getStatus().equals("in progress")) {
                     System.out.println("нашлось");
                     emailService.sendSimpleMessage(task.getMail(), "Овопещение о задаче",
-                            "Здравствуйте, у вас есть невыполненное задание: " + task.getTitle() + "\nУспейте к " + task.getTime());
+                            "Здравствуйте, у вас есть невыполненное задание: " + task.getTitle() + "\nОписание: " + task.getText() + "\nУспейте к " + task.getTime() + "\n\nУдачного дня!");
                 }
             }
         }
