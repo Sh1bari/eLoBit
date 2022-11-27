@@ -49,11 +49,17 @@ public class ProfileController {
         usersRepo.save(users);
         return new Status("success");
     }
-    @GetMapping("/show/{key}")
-    private Users show(@PathVariable String key){
+    @GetMapping("/show/{username}")
+    private Users show(@PathVariable String username){
+
+        Users user = usersRepo.findByUsername(username);
+        return user;
+    }
+
+    @GetMapping("/showByKey/{key}")
+    private Users showByKey(@PathVariable String key){
 
         Users user = usersRepo.findByPassword(key);
         return user;
     }
-
 }
