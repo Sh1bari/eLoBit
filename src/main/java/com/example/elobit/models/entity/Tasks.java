@@ -1,5 +1,4 @@
 package com.example.elobit.models.entity;
-
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -15,24 +14,45 @@ import javax.persistence.Id;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class Tasks {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String day; //формат: (0 <= число <= 31)
+    /**
+     * формат: (0 <= число <= 31)
+     */
+    private String day;
 
-    private String month; //формат: (Ноябрь, Декабрь...)
+    /**
+     * формат: (Ноябрь, Декабрь...)
+     */
+    private String month;
 
-    private String year; //формат: (2022, 2021...)
+    /**
+     * формат: (2022, 2021...)
+     */
+    private String year;
 
-    private String time; //формат: время(17:05, 19:12...)
+    /**
+     * формат: время(17:05, 19:12...)
+     */
+    private String time;
 
     private String title;
 
     private String text;
 
-    private String status; //формат (done/in progress)
+    /**
+     * формат (done/in progress)
+     */
+    private String status;
 
-    private String importance; //формат: (true/false)
+    /**
+     * формат: (true/false)
+     */
+    private String importance;
 
-    private String alert; //формат: кол-во часов(1, 2...)
+    /**
+     * кол-во минут(15, 20...)
+     */
+    private String alert;
 }

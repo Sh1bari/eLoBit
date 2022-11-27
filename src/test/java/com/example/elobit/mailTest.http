@@ -1,5 +1,5 @@
 ### GET request with a header
-GET http://localhost:8082/test
+GET http://localhost:8082/mail/test
 
 > {%
 client.test("Request executed successfully", function() {

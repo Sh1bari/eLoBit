@@ -17,17 +17,19 @@ import java.util.List;
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @ToString
 public class Users {
     @Id
-    private String username;
+    private String mail;
 
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "username")
+    private String username;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "mail")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Notices> notices = new ArrayList<>(); // таблица для заметок
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "username")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "mail")
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Tasks> tasks = new ArrayList<>(); //таблица для задач
 }

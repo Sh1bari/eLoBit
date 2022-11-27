@@ -8,5 +8,9 @@ import java.util.List;
 
 public interface UsersRepo extends CrudRepository<Users, String> {
     Users findByUsername(String username);
+
+    boolean existsByMail(String mail);
     boolean existsByUsername(String username);
+
+    Users findByMail(String mail);
 }
