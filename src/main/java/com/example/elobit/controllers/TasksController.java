@@ -39,6 +39,17 @@ public class TasksController {
                 .collect(Collectors.toList());
     }
 
+
+    @PostMapping("/showImportance/{username}")
+    private List<Tasks> showImportanceTasks(@PathVariable String username, @RequestBody Tasks tasks){
+        Users user = usersRepo.findByUsername(username);
+        int year = Integer.parseInt(tasks.getYear());
+        return user.getTasks().stream()
+                .filter(o -> o.getImportance().equals("true"))
+                .filter(o -> Integer.parseInt(o.getYear()) >= year)
+                .collect(Collectors.toList());
+    }
+
     /**
      * @author Vladimir Krasnov
      * @param username cookie username
@@ -103,13 +114,13 @@ public class TasksController {
      */
     @PostMapping("/setStatus")
     private Status setStatus(@RequestBody Tasks tasks){
-        Status status = new Status("denied");
+        Status status = new Status("success");
         try {
             Tasks task = tasksRepo.findTasksById(tasks.getId());
             task.setStatus(tasks.getStatus());
             tasksRepo.save(task);
         } catch (Exception e){
-            status.setStatus("success");
+            status.setStatus("denied");
         }
         return status;
     }
