@@ -32,7 +32,7 @@ public class MailTasksSender {
      * рассылка сообщений
      */
     @Async
-    @Scheduled(cron = "*/1 * * * * *")
+    @Scheduled(cron = "0 */1 * ? * *")
     @ConditionalOnProperty(name="scheduler.enabled")
     public void scheduleFixedRateTaskAsync() {
         long curMil1 = System.currentTimeMillis()/1000;
